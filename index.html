@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0c2461">
+    <title>MovieSearch</title>
+    <link rel="shortcut icon" href="icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-content">
+            <h1 class="app-title">MovieSearch</h1>
+            <nav class="main-nav">
+                <button id="Ver-Informe" class="nav-button">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Estadísticas</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="search-section">
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="input" placeholder="Buscar película o serie..." aria-label="Buscar película o serie">
+                </div>
+                <div class="search-controls">
+                    <select id="tipo" class="search-select" aria-label="Seleccionar tipo de contenido">
+                        <option value="movie" selected="selected">Películas</option>
+                        <option value="series">Series</option>
+                    </select>
+                    <button id="botonBuscar" class="search-button">
+                        <i class="fas fa-search"></i>
+                        <span>Buscar</span>
+                    </button>
+                </div>
+            </div>
+            <div id="TotalResultados" class="results-count"></div>
+        </section>
+
+        <div id="Cargando" class="loader">
+            <div class="spinner"></div>
+            <span class="loading-text">Cargando resultados...</span>
+        </div>
+
+        <section class="results-section">
+            <div id="listaPeliculas" class="movies-grid"></div>
+        </section>
+    </main>
+
+    <!-- Modal de Detalles -->
+    <div id="modal" class="modal" role="dialog" aria-labelledby="modal-title">
+        <div class="modal-contenido">
+            <button id="cerrarModal" class="modal-close" aria-label="Cerrar modal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="movie-details">
+                <div class="poster-container">
+                    <img id="imagenPelicula" src="default.png" alt="" class="movie-poster">
+                </div>
+                <div class="details-content">
+                    <h2 id="tituloPelicula" class="movie-title"></h2>
+                    <div class="movie-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <span id="anioPelicula"></span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-video"></i>
+                            <span id="directorPelicula"></span>
+                        </div>
+                    </div>
+                    <div class="movie-cast">
+                        <h3>Reparto</h3>
+                        <p id="actoresPelicula"></p>
+                    </div>
+                    <div class="movie-ratings">
+                        <h3>Valoraciones</h3>
+                        <div id="Rating" class="ratings-container"></div>
+                    </div>
+                    <div class="movie-plot">
+                        <h3>Sinopsis</h3>
+                        <p id="sinopsisPelicula"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Informe -->
+    <div id="informeDiv" class="modal" role="dialog" aria-labelledby="informe-title">
+        <div class="modal-contenido informe-modal">
+            <div class="informe-header">
+                <h2 id="informe-title" class="informe-title">
+                    <i class="fas fa-chart-bar"></i>
+                    Estadísticas
+                </h2>
+                <button id="cerrarInforme" class="modal-close" aria-label="Cerrar informe">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="informe-tabs">
+                <button class="tab-button active" data-tipo="rating">
+                    <i class="fas fa-star"></i>
+                    Mejor Valoradas
+                </button>
+                <button class="tab-button" data-tipo="boxOffice">
+                    <i class="fas fa-dollar-sign"></i>
+                    Mayor Recaudación
+                </button>
+                <button class="tab-button" data-tipo="votes">
+                    <i class="fas fa-users"></i>
+                    Más Votadas
+                </button>
+            </div>
+
+            <div class="informe-content-wrapper">
+                <div id="contenidoInforme" class="informe-content"></div>
+                <div id="chart_div" class="chart-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="load-more-container">
+        <button id="buscarMas" class="load-more-button">
+            <i class="fas fa-search-plus"></i>
+            <span>Buscar Más</span>
+        </button>
+    </div>
+
+    <footer class="app-footer">
+        <p> 2024 MovieSearch. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
